@@ -31,8 +31,8 @@ public class Exercise1Test extends ClassicOnlineStore {
          * Iterate {@link customerIterable} with {@link Iterable#forEach} and use the {@link Consumer}
          * to finish creating the name list.
          */
-        Consumer<Object> consumer = null;
-        // customerIterable.
+        Consumer<Customer> consumer = customer -> nameList.add(customer.getName());
+        customerIterable.forEach(consumer);
 
         assertThat(nameList.toString(), is("[Joe, Steven, Patrick, Diana, Chris, Kathy, Alice, Andrew, Martin, Amy]"));
     }
@@ -46,8 +46,8 @@ public class Exercise1Test extends ClassicOnlineStore {
          * Create a {@link Predicate} which predicates if the input string contains "e".
          * Remove elements from {@link nameCollection} which contains "e" using {@link Collection#removeIf}.
          */
-        Predicate<Object> predicate = null;
-        // nameCollection.
+        Predicate<String> predicate = name -> name.indexOf('e') != -1;
+        nameCollection.removeIf(predicate);
 
         assertThat(nameCollection.toString(), is("[Patrick, Chris]"));
     }
@@ -61,8 +61,8 @@ public class Exercise1Test extends ClassicOnlineStore {
          * Create a {@link UnaryOperator} which returns given string wrapped with "()".
          * Replace the elements in {@link nameList} with string wrapped with "()" using {@link List#replaceAll} .
          */
-        UnaryOperator<Object> unaryOperator = null;
-        // nameList.
+        UnaryOperator<String> unaryOperator = name -> "("+name+")";
+        nameList.replaceAll(unaryOperator);
 
         assertThat(nameList.toString(), is("[(Joe), (Steven), (Patrick), (Chris)]"));
     }
@@ -75,8 +75,8 @@ public class Exercise1Test extends ClassicOnlineStore {
         /**
          * Create a {@link Comparator} to sort the name list by their name's length in ascending order.
          */
-        Comparator<Object> comparator = null;
-        // nameList.
+        Comparator<String> comparator = (name1, name2) -> Integer.compare(name1.length(), name2.length());
+        nameList.sort(comparator);
 
         assertThat(nameList.toString(), is("[Joe, Chris, Steven, Patrick]"));
     }
