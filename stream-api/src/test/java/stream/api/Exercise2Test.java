@@ -27,7 +27,7 @@ public class Exercise2Test extends ClassicOnlineStore {
          * Create a stream with ascending ordered age values.
          * Use {@link Stream#sorted} to sort them.
          */
-        Stream<Integer> sortedAgeStream = null;
+        Stream<Integer> sortedAgeStream = customerList.stream().map(Customer::getAge).sorted();
 
         List<Integer> sortedAgeList = sortedAgeStream.collect(Collectors.toList());
         assertThat(sortedAgeList, contains(21, 22, 22, 26, 27, 28, 32, 35, 36, 38));
