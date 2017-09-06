@@ -3,16 +3,17 @@ package stream.api;
 import common.test.tool.annotation.Easy;
 import common.test.tool.dataset.ClassicOnlineStore;
 import common.test.tool.entity.Customer;
-
+import common.test.tool.entity.Item;
 import org.junit.Test;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Stream;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class Exercise3Test extends ClassicOnlineStore {
 
@@ -23,7 +24,8 @@ public class Exercise3Test extends ClassicOnlineStore {
         /**
          * Count how many items there are in {@link Customer.wantToBuy} using {@link Stream#count}
          */
-        long sum = 0L;
+        Function<Customer, Stream<Item>> getItemStream = customer -> customer.getWantToBuy().stream();
+        long sum = customerList.stream().flatMap(getItemStream).map(Item::getName).count();
 
         assertThat(sum, is(32L));
     }
